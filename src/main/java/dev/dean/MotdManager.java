@@ -69,14 +69,18 @@ public class MotdManager {
     }
 
     /**
-     * Stops the rotation task and saves the current state.
+     * Stops the rotation task.
+     * <p>
+     * Note: We no longer save the current index to the configuration file (saveConfig())
+     * on server stop to prevent accidentally overwriting user changes made to the
+     * config.yml while the server is running.
+     * </p>
      */
     public void stopRotation() {
         if (rotationTask != null) {
             rotationTask.cancel();
             rotationTask = null;
         }
-        saveState();
     }
 
     /**
@@ -86,15 +90,6 @@ public class MotdManager {
         if (motds.isEmpty()) return;
 
         currentIndex = (currentIndex + 1) % motds.size();
-    }
-
-    /**
-     * Saves the current rotation state to the configuration.
-     */
-    private void saveState() {
-        FileConfiguration config = plugin.getConfig();
-        config.set("current-index", currentIndex);
-        plugin.saveConfig();
     }
 
     /**
