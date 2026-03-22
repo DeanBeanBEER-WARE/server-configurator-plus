@@ -1,0 +1,70 @@
+# ServerConfiguratorPlus Configuration
+
+# Permanent Server Name (First line of the MOTD)
+server-name: "&a2X&62T&f&r"
+
+# List of MOTDs to rotate every 5 minutes (Second line of the MOTD). 
+# Supports color codes with & and %player% placeholder (shows player name if known IP).
+motds:
+  - "&a no black people allowed"
+  - "&6 NO TRANNIES ALLOWED - FP MALES ONLY"
+  - "&a why the fuck are you having sex with the doritos"
+  - "&6 Family-friendly Christian server!"
+  - "&a why are we gay"
+  - "&6 Is China in Mexico?"
+  - "&a the 19 year old mexican is alive niggas"
+  - "&6 added Niggadupe V2"
+
+# Format for the /say command
+# Use {message} as a placeholder for the text. You can use standard color codes (e.g. &c, &f, &l).
+say-format: "&a[2X&62T]&f:&r {message}"
+
+# List of strings to filter from the console. 
+# Any log message containing one of these strings will be hidden.
+console-filters:
+  - "moved too quickly"
+
+# Hover Text (Player Sample)
+# This requires Paper API support.
+hover-text:
+  - "&6Welcome to our server!"
+  - "&aClick to join!"
+
+# Maintenance Mode Settings
+maintenance:
+  enabled: false
+  motd: "&4&lServer is in Maintenance Mode"
+  kick-message: "&cWe are currently performing maintenance. Please check back later."
+
+# Slot Configuration
+slots:
+  enabled: true
+  # 'one-more': Always shows 1 more than current players (e.g. 5/6)
+  # 'custom': Uses the 'max' value below
+  type: "custom"
+  max: 100
+  # Custom version text (e.g. "Maintenance" or "1.12.2")
+  # Leave empty to use default
+  custom-text: ""
+
+# Automated Chat Announcements
+# You can use legacy color codes (e.g., &a for green, &l for bold).
+# These messages will be broadcast to all online players at the specified interval.
+announcements:
+  enabled: true
+  # Interval in minutes
+  interval: 5
+  # List of messages to rotate through
+  messages:
+    - '&a[2X&62T]&f:&r &7There is currently a secret event dupe going on! Find out more in our Discord server! (/discord)'
+    - '&a[2X&62T]&f:&r &7Join our Discord server at &bhttps://discord.gg/7qM4v5xAYj&r or type in /discord'
+    - '&a[2X&62T]&f:&r &7You can submit your own MOTD suggestions in a specific Discord channel (/discord)'
+    - '&a[2X&62T]&f:&r &7The server has &e/tpa &7and &e/home&7.'
+
+# Mute System Settings
+# You can customize messages here if you want to expand the system later.
+mute-settings:
+  broadcast-on-mute: true
+
+# Internal tracking - do not change unless you know what you're doing
+current-index: 0

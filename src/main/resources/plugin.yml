@@ -1,0 +1,29 @@
+name: ServerConfiguratorPlus
+version: ${version}
+main: dev.dean.ServerConfiguratorPlus
+api-version: "1.21"
+folia-supported: true
+author: DeanBeanss
+commands:
+  motd:
+    description: Shows the current rotating MOTD
+  players:
+    description: Shows player count and list of players
+  status:
+    description: Shows player count, list of players, motd and server version
+  scp:
+    description: Admin command for ServerConfiguratorPlus
+    permission: scp.admin
+  kill:
+    description: Kills the player who executes the command.
+  say:
+    description: Broadcast a custom message to the server
+    permission: serverconfiguratorplus.say
+  mute:
+    description: Stummschalten eines Spielers
+  unmute:
+    description: Stummschaltung eines Spielers aufheben
+  dupe:
+    description: Shows your current coordinates
+  rules:
+    description: Shows your current coordinates

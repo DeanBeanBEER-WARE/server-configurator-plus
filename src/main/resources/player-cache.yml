@@ -1,0 +1,3 @@
+# Player Cache Storage
+# This file stores mapping between IP addresses and player names.
+# IP addresses are stored with underscores instead of dots (e.g., 127_0_0_1).

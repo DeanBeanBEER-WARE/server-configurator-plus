@@ -1,0 +1,7 @@
+AGENT.md
+simple_commands.code-workspace
+build/
+bin/
+.gradle/
+*.jar
+.DS_Store
