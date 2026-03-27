@@ -27,3 +27,9 @@ commands:
     description: Shows your current coordinates
   rules:
     description: Shows your current coordinates
+  nickname:
+    description: Set your nickname
+    aliases: [nick]
+  itemname:
+    description: Set item name in hand
+    aliases: [in]

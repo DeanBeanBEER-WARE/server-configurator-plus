@@ -92,6 +92,10 @@ public class ServerConfiguratorPlus extends JavaPlugin {
         Objects.requireNonNull(getCommand("mute")).setTabCompleter(muteCommand);
         Objects.requireNonNull(getCommand("unmute")).setExecutor(unmuteCommand);
         Objects.requireNonNull(getCommand("unmute")).setTabCompleter(unmuteCommand);
+        
+        FormattingCommands formattingCommands = new FormattingCommands(this);
+        Objects.requireNonNull(getCommand("nickname")).setExecutor(formattingCommands);
+        Objects.requireNonNull(getCommand("itemname")).setExecutor(formattingCommands);
     }
 
     @Override
