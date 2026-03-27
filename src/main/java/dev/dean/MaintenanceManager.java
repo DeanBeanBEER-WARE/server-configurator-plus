@@ -50,11 +50,17 @@ public class MaintenanceManager {
 
     /**
      * Toggles the maintenance mode state and saves it to the configuration.
+     * <p>
+     * Before saving, the configuration is reloaded from disk to ensure any manual
+     * changes made by the user while the server is running are not accidentally overwritten.
+     * </p>
      *
      * @return The new state of maintenance mode.
      */
     public boolean toggleMaintenance() {
         this.enabled = !this.enabled;
+        // Reload config first to prevent overwriting pending manual changes on disk
+        plugin.reloadConfig();
         plugin.getConfig().set("maintenance.enabled", this.enabled);
         plugin.saveConfig();
         return this.enabled;

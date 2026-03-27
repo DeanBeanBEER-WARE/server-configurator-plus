@@ -20,6 +20,7 @@ public class PlayerCacheManager {
     private final File cacheFile;
     private FileConfiguration cacheConfig;
     private final Map<String, String> ipToName = new ConcurrentHashMap<>();
+    private final Map<String, String> uuidToNickname = new ConcurrentHashMap<>();
 
     /**
      * Constructs a new PlayerCacheManager.
@@ -54,9 +55,19 @@ public class PlayerCacheManager {
         
         cacheConfig = YamlConfiguration.loadConfiguration(cacheFile);
         for (String ipKey : cacheConfig.getKeys(false)) {
+            if (ipKey.equals("nicknames")) continue;
             String name = cacheConfig.getString(ipKey);
-            if (name != null) {
+            if (name != null && !cacheConfig.isConfigurationSection(ipKey)) {
                 ipToName.put(ipKey.replace("_", "."), name);
+            }
+        }
+        
+        if (cacheConfig.isConfigurationSection("nicknames")) {
+            for (String uuid : cacheConfig.getConfigurationSection("nicknames").getKeys(false)) {
+                String nick = cacheConfig.getString("nicknames." + uuid);
+                if (nick != null) {
+                    uuidToNickname.put(uuid, nick);
+                }
             }
         }
     }
@@ -83,6 +94,26 @@ public class PlayerCacheManager {
     }
 
     /**
+     * Updates the cache with a player's UUID and nickname.
+     *
+     * @param uuid The player's UUID as a string.
+     * @param nickname The player's formatted nickname string.
+     */
+    public void setNickname(@NotNull String uuid, @NotNull String nickname) {
+        uuidToNickname.put(uuid, nickname);
+    }
+
+    /**
+     * Retrieves a player's nickname from the cache based on their UUID.
+     *
+     * @param uuid The UUID string to look up.
+     * @return The cached nickname, or null if not found.
+     */
+    public String getNickname(@NotNull String uuid) {
+        return uuidToNickname.get(uuid);
+    }
+
+    /**
      * Saves the current cache to the player-cache.yml file.
      */
     public void saveCache() {
@@ -91,6 +122,11 @@ public class PlayerCacheManager {
         for (Map.Entry<String, String> entry : ipToName.entrySet()) {
             cacheConfig.set(entry.getKey().replace(".", "_"), entry.getValue());
         }
+        
+        for (Map.Entry<String, String> entry : uuidToNickname.entrySet()) {
+            cacheConfig.set("nicknames." + entry.getKey(), entry.getValue());
+        }
+        
         try {
             cacheConfig.save(cacheFile);
         } catch (IOException e) {

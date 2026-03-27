@@ -38,12 +38,11 @@ public class ServerConfiguratorPlus extends JavaPlugin {
                 getLogger().warning("LuckPerms API not found! Hierarchy checks will be disabled.");
             }
 
-            // Save default config only if it does not exist
+            // Save default config only if it does not exist.
+            // We don't call saveConfig() here to avoid overwriting changes made by the user
+            // while the server is stopped, or stripping comments from the config.yml file.
             getConfig().options().copyDefaults(true);
             saveDefaultConfig();
-            
-            // Re-save config to write any missing default values
-            saveConfig();
             
             this.motdManager = new MotdManager(this);
             this.playerCacheManager = new PlayerCacheManager(this);
@@ -93,6 +92,10 @@ public class ServerConfiguratorPlus extends JavaPlugin {
         Objects.requireNonNull(getCommand("mute")).setTabCompleter(muteCommand);
         Objects.requireNonNull(getCommand("unmute")).setExecutor(unmuteCommand);
         Objects.requireNonNull(getCommand("unmute")).setTabCompleter(unmuteCommand);
+        
+        FormattingCommands formattingCommands = new FormattingCommands(this);
+        Objects.requireNonNull(getCommand("nickname")).setExecutor(formattingCommands);
+        Objects.requireNonNull(getCommand("itemname")).setExecutor(formattingCommands);
     }
 
     @Override

@@ -41,6 +41,11 @@ public class JoinListener implements Listener {
             String name = player.getName();
             plugin.getPlayerCacheManager().updateCache(ip, name);
         }
+
+        String nickname = plugin.getPlayerCacheManager().getNickname(player.getUniqueId().toString());
+        if (nickname != null) {
+            player.displayName(dev.dean.util.TextFormatUtil.format(nickname));
+        }
     }
 
     /**
