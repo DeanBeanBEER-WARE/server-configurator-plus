@@ -6,3 +6,4 @@ bin/
 *.jar
 .DS_Store
 .vscode/
+AGENT.md
